@@ -1,0 +1,59 @@
+<div class="d-flex">
+  <div id="contenido" class="w-100">
+    <div class="row justify-content-center align-items-center">
+      <!-- Configuración del logo  -->
+      <div class="col-lg-5">
+        <img class="logo" src="./assets/img/imagen_inicio.png">
+      </div>
+      <!-- -->
+      <div class="col-lg-7 seccion-iniciarSesion">
+        <div class="margen-camposForm">
+          <!-- Título -->
+          <div class="marginCamposInicioSesion mb-4">
+            Login
+          </div>
+          <div class="container mt-5">
+            <!-- Campos de ingreso -->
+            <form #loginForm="ngForm" (ngSubmit)="ingresar()" autocomplete="off">
+              <div class="form-control-config mb-4">
+                <label class="text-center">
+                  <span style="font-size: 18px; font-weight: 400;">Email</span>
+                </label>
+                <input type="text" class="form-control" autofocus="autofocus" name="email" ngModel #email="ngModel"
+                  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" placeholder="Correo institucional" required>
+                <small *ngIf="!email.valid && email.touched" class="invalid-feedback d-block">Ingresa su correo
+                  electrónico</small>
+              </div>
+              <div class="form-control-config mb-2">
+                <label class="text-center">
+                  <span style="font-size: 18px;  font-weight: 400;">Password</span>
+                </label>
+                <input type="password" name="password" class="form-control" ngModel #password="ngModel"
+                  placeholder="Número de identificación" required>
+                <small *ngIf="!password.valid && password.touched" class="invalid-feedback d-block">Ingresa su
+                  contraseña</small>
+                <!-- recordar contraseña -->
+                <div class="float-end">
+                  <small class="cl-primary" style="cursor: pointer;">Recordar contraseña</small>
+                </div><br>
+              </div>
+              <!-- Botón de inicio de sesión -->
+              <div class="col-12 text-center">
+                <button class="btn btn-primary botonConfig" [disabled]="loginForm.invalid" type="submit">Ingresar</button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <!-- Footer -->
+        <div class="position-sticky container" style="top: 100vh;">
+          <footer>
+            <div class="container text-center p-3">
+
+            </div>
+          </footer>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
