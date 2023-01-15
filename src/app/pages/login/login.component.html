@@ -3,53 +3,90 @@
     <div class="row justify-content-center align-items-center">
       <!-- Configuración del logo  -->
       <div class="col-lg-5">
-        <img class="logo" src="./assets/img/imagen_inicio.png">
+        <img class="logo" src="./assets/img/imagen_inicio.png" />
       </div>
       <!-- -->
       <div class="col-lg-7 seccion-iniciarSesion">
         <div class="margen-camposForm">
           <!-- Título -->
-          <div class="marginCamposInicioSesion mb-4">
-            Login
-          </div>
+          <div class="marginCamposInicioSesion mb-4">Login</div>
           <div class="container mt-5">
             <!-- Campos de ingreso -->
-            <form #loginForm="ngForm" (ngSubmit)="ingresar()" autocomplete="off">
+            <form
+              #loginForm="ngForm"
+              (ngSubmit)="ingresar()"
+              autocomplete="off"
+            >
               <div class="form-control-config mb-4">
                 <label class="text-center">
-                  <span style="font-size: 18px; font-weight: 400;">Email</span>
+                  <span style="font-size: 18px; font-weight: 400">Email</span>
                 </label>
-                <input type="text" class="form-control" autofocus="autofocus" name="email" ngModel #email="ngModel"
-                  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" placeholder="Correo institucional" required>
-                <small *ngIf="!email.valid && email.touched" class="invalid-feedback d-block">Ingresa su correo
-                  electrónico</small>
+                <input
+                  type="text"
+                  class="form-control"
+                  autofocus="autofocus"
+                  name="email"
+                  ngModel
+                  #email="ngModel"
+                  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+                  placeholder="Correo institucional"
+                  required
+                />
+                <small
+                  *ngIf="!email.valid && email.touched"
+                  class="invalid-feedback d-block"
+                  >Ingresa su correo electrónico</small
+                >
               </div>
               <div class="form-control-config mb-2">
                 <label class="text-center">
-                  <span style="font-size: 18px;  font-weight: 400;">Password</span>
+                  <span style="font-size: 18px; font-weight: 400"
+                    >Password</span
+                  >
                 </label>
-                <input type="password" name="password" class="form-control" ngModel #password="ngModel"
-                  placeholder="Número de identificación" required>
-                <small *ngIf="!password.valid && password.touched" class="invalid-feedback d-block">Ingresa su
-                  contraseña</small>
+                <input
+                  type="password"
+                  name="password"
+                  class="form-control"
+                  ngModel
+                  #password="ngModel"
+                  placeholder="Número de identificación"
+                  required
+                />
+                <small
+                  *ngIf="!password.valid && password.touched"
+                  class="invalid-feedback d-block"
+                  >Ingresa su contraseña</small
+                >
                 <!--boton del Modal recordar contraseña -->
                 <div class="float-end">
-                  <small class="cl-primary" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#exampleModal">Recordar contraseña</small>
-                </div><br>
+                  <small
+                    class="cl-primary"
+                    style="cursor: pointer"
+                    data-bs-toggle="modal"
+                    data-bs-target="#exampleModal"
+                    >Recordar contraseña</small
+                  >
+                </div>
+                <br />
               </div>
               <!-- Botón de inicio de sesión -->
               <div class="col-12 text-center">
-                <button class="btn btn-primary botonConfig" [disabled]="loginForm.invalid" type="submit">Ingresar</button>
+                <button
+                  class="btn btn-primary botonConfig"
+                  [disabled]="loginForm.invalid"
+                  type="submit"
+                >
+                  Ingresar
+                </button>
               </div>
             </form>
           </div>
         </div>
         <!-- Footer -->
-        <div class="position-sticky container" style="top: 100vh;">
+        <div class="position-sticky container" style="top: 100vh">
           <footer>
-            <div class="container text-center p-3">
-
-            </div>
+            <div class="container text-center p-3"></div>
           </footer>
         </div>
       </div>
@@ -57,61 +94,96 @@
   </div>
 </div>
 <!-- Modal Recordar contraseña -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Recordar Contraseña</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <h1 class="modal-title fs-5" id="exampleModalLabel">
+          Recordar Contraseña
+        </h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
       </div>
       <div class="modal-body">
         <!-- Validar documento identidad-->
-        <div class="row mt-3">
+        <div class="row mt-3" *ngIf="numeroDocumento">
           <label class="form-label">Nùmero de Documento</label>
           <div class="col-8">
             <input
               type="number"
               class="form-control"
               placeholder="Ingrese su nùmero de documento"
+              name="numeroDocumento"
+              ngModel
+              #numeroDocumento="ngModel"
+              [(ngModel)]="recordarContra.numeroDocumento"
+              required
             />
           </div>
           <div class="col-3">
-            <button class="btn btn-primary botonesModal">Enviar</button>
+            <button
+              class="btn btn-primary botonesModal"
+              (click)="enviarDocumuento()"
+            >
+              Enviar
+            </button>
           </div>
         </div>
         <!-- Codigo -->
-        <div class="row mt-3">
+        <div class="row mt-3" *ngIf="codigo">
           <label class="form-label">Ingresar Codigo</label>
           <div class="col-12">
             <input
               type="number"
               class="form-control"
               placeholder="Ingrese el codigo enviado"
+              name="codigo"
+              ngModel
+              #codigo="ngModel"
+              required
             />
           </div>
           <div class="col text-center mt-2">
-            <button class="btn btn-primary botonesModal">Validar</button>
+            <button
+              class="btn btn-primary botonesModal"
+              (click)="enviarCodigo()"
+            >
+              Validar
+            </button>
           </div>
         </div>
         <!--  Crear contraseña -->
-        <div class="col-12 mt-3">
-          <label class="form-label">Contraseña Nueva</label>
-          <input
-            type="number"
-            class="form-control"
-            placeholder="Ingrese su contraseña nueva"
-          />
-        </div>
-        <div class="col-12 mt-3">
-          <label class="form-label">Confirmar Contraseña</label>
-          <input
-            type="number"
-            class="form-control"
-            placeholder="Ingrese su contraseña nueva"
-          />
-        </div>
-        <div class="col text-center mt-2">
-          <button class="btn btn-primary botonesModal">Guardar</button>
+        <div class="row mt-3" *ngIf="nuevaContra">
+          <div class="col-12">
+            <label class="form-label">Contraseña Nueva</label>
+            <input
+              type="number"
+              class="form-control"
+              placeholder="Ingrese su contraseña nueva"
+            />
+          </div>
+          <div class="col-12">
+            <label class="form-label">Confirmar Contraseña</label>
+            <input
+              type="number"
+              class="form-control"
+              placeholder="Ingrese su contraseña nueva"
+            />
+          </div>
+          <div class="col text-center mt-2">
+            <button class="btn btn-primary botonesModal" (click)="guardarContra()" data-bs-dismiss="modal">Guardar</button>
+            <button type="button" class="btn btn-danger botonesModal ml-2" data-bs-dismiss="modal">Cancelar</button>
+          </div>
         </div>
       </div>
     </div>
