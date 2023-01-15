@@ -9,13 +9,15 @@ import { HomeComponent } from './pages/home/home.component';
 import { RouterModule } from '@angular/router';
 import { MenuModule } from './shared/menu/menu.module';
 import { CertificadosComponent } from './pages/certificados/certificados.component';
+import { AjustesComponent } from './pages/ajustes/ajustes.component';
 
 @NgModule({
     declarations: [
         AppComponent,
         LoginComponent,
         HomeComponent,
-        CertificadosComponent
+        CertificadosComponent,
+        AjustesComponent
     ],
     providers: [],
     bootstrap: [AppComponent],
