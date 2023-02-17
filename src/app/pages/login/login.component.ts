@@ -51,6 +51,11 @@ export class LoginComponent implements OnInit {
     this.nuevaContra = false;
   }
 
+  // enviar al componente de recuperar-clave
+  recuperarClave(){
+    this._router.navigate(['/recuperar-clave']);
+  }
+
   alertas(title: string, text: string, icon: any){
      Swal.fire({
       title: title,
