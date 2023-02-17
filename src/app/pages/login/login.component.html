@@ -3,7 +3,7 @@
     <div class="row justify-content-center align-items-center">
       <!-- Configuración del logo  -->
       <div class="col-lg-5">
-        <img class="logo" src="./assets/img/imagen_inicio.png" />
+        <app-imagen-inicio></app-imagen-inicio>
       </div>
       <!-- -->
       <div class="col-lg-7 seccion-iniciarSesion">
@@ -59,13 +59,12 @@
                   >Ingresa su contraseña</small
                 >
                 <!--boton del Modal recordar contraseña -->
-                <div class="float-end">
+                <div class="float-end mt-2">
                   <small
                     class="cl-primary"
                     style="cursor: pointer"
-                    data-bs-toggle="modal"
-                    data-bs-target="#exampleModal"
-                    >Recordar contraseña</small
+                    (click)="recuperarClave()"
+                    >Recuperar contraseña</small
                   >
                 </div>
                 <br />

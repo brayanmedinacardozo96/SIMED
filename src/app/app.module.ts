@@ -10,6 +10,9 @@ import { RouterModule } from '@angular/router';
 import { MenuModule } from './shared/menu/menu.module';
 import { CertificadosComponent } from './pages/certificados/certificados.component';
 import { AjustesComponent } from './pages/ajustes/ajustes.component';
+import { RecuperarClaveComponent } from './pages/login/components/recuperar-clave/recuperar-clave.component';
+import { ImagenInicioComponent } from './pages/login/components/imagen-inicio/imagen-inicio.component';
+import { ValidarCodigoComponent } from './pages/login/components/validar-codigo/validar-codigo.component';
 
 @NgModule({
     declarations: [
@@ -17,7 +20,10 @@ import { AjustesComponent } from './pages/ajustes/ajustes.component';
         LoginComponent,
         HomeComponent,
         CertificadosComponent,
-        AjustesComponent
+        AjustesComponent,
+        RecuperarClaveComponent,
+        ImagenInicioComponent,
+        ValidarCodigoComponent
     ],
     providers: [],
     bootstrap: [AppComponent],

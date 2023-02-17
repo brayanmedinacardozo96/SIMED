@@ -1,0 +1,57 @@
+<div class="d-flex">
+    <div id="contenido" class="w-100">
+        <div class="row justify-content-center align-items-center">
+            <!-- Configuración del logo  -->
+            <div class="col-lg-5">
+                <app-imagen-inicio></app-imagen-inicio>
+            </div>
+            <!-- -->
+            <div class="col-lg-7 seccion-iniciarSesion">
+                <div class="margen-camposForm">
+                    <!-- Título -->
+                    <div class="marginCamposInicioSesion mb-4">¿Olvidaste tu contraseña?</div>
+                    
+                    <div class="container mt-2">
+                        
+                        <!-- Campos de ingreso -->
+                        <form #recuperarClave="ngForm" (ngSubmit)="validarCodigo()" autocomplete="off" >
+                            <div class="form-control-config mb-4 text-center">
+                                <span>
+                                    Para restaurar su contraseña, Debe ingresa su número de documento. <br>
+                                    Es posible que tengas que consultar en su carpeta de spam.
+                                </span>
+                            </div>
+                            <!-- Codigo -->
+                            <div class="form-control-config mb-1">
+                                
+                                <label class="text-center">
+                                    <span style="font-size: 16px; font-weight: 300">Número de documento</span>
+                                </label>
+                                <input type="text" class="form-control mt-2" autofocus="autofocus" name="numeroDocumento" ngModel
+                                    #numeroDocumento="ngModel"
+                                    [(ngModel)]="codigo"
+                                    placeholder="Ingrese su número de documento" required />
+                                <small *ngIf="!numeroDocumento.valid && numeroDocumento.touched" class="invalid-feedback d-block">Debe ingresar
+                                    su número de documento
+                                </small>
+                            </div>                
+                            <!-- Botón -->
+                            <div class="col-12 text-center">
+                                <button class="btn btn-primary botonConfig" [disabled]="recuperarClave.invalid"
+                                    type="submit">
+                                    Enviar
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!-- Footer -->
+                <div class="position-sticky container" style="top: 100vh">
+                    <footer>
+                        <div class="container text-center p-3"></div>
+                    </footer>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
