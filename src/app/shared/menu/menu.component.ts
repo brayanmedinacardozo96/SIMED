@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import Swal from 'sweetalert2';
+import { LocalstorageService } from '../../services/localstorage/localstorage.service'
+
 
 @Component({
   selector: 'app-menu',
@@ -7,11 +9,17 @@ import Swal from 'sweetalert2';
   styleUrls: ['./menu.component.css'],
 })
 export class MenuComponent {
+
+  nameUser = "";
   recordarClave = {
     claveActual: '',
     claveNueva: '',
     claveNueva2: '',
   };
+
+  constructor(private storage: LocalstorageService) {
+    this.nameUser = storage.getData('user').NombreCompleto;
+  }
 
   guardar() {
     console.log(this.recordarClave);

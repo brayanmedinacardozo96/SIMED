@@ -1,77 +1,101 @@
+<mat-toolbar>
+  <span>{{nameApp}}</span>
+  <span style="flex: 1 1 auto;"></span>
+  <a href="#">Iniciar sesión</a>
+</mat-toolbar>
+
 <div class="d-flex">
-    <div id="contenido" class="w-100">
-        <div class="row justify-content-center align-items-center">
-            <!-- Configuración del logo  -->
+  <div id="contenido" class="w-100">
+    <div class="row justify-content-center align-items-center">
+      <!-- Configuración del logo  -->
+      <!--
             <div class="col-lg-5">
                 <app-imagen-inicio></app-imagen-inicio>
             </div>
-            <!-- -->
-            <div class="col-lg-7 seccion-iniciarSesion">
-                <div class="margen-camposForm">
-                    <!-- Título -->
-                    <div class="marginCamposInicioSesion mb-4">¿Olvidaste tu contraseña?</div>
-                    <div class="container mt-2">
-                        <!-- Campos -->
-                        <form #validarCodigo="ngForm" (ngSubmit)="onSubmit()"  autocomplete="off" >
-                            <!-- Codigo -->
-                            <div class="form-control-config mb-1">
-                                <label class="text-center">
-                                    <span style="font-size: 18px; font-weight: 200">Código</span>
-                                </label>
-                                <input type="text" class="form-control mt-2" autofocus="autofocus" name="codigo" ngModel
-                                    #codigo="ngModel"
-                                    [(ngModel)]="validar.codigo"
-                                    placeholder="Ingrese el codigo enviado" required />
-                                <small *ngIf="!codigo.valid && codigo.touched" class="invalid-feedback d-block">Debe ingresar
-                                    el codigo enviado
-                                </small><br>
-                                <hr>
-                            </div>
-                             <!-- Contraseña -->
-                             <div class="form-control-config mb-1">
-                                <label class="text-center">
-                                    <span style="font-size: 16px; font-weight: 300">Contraseña nueva</span>
-                                </label>
-                                <input type="password" class="form-control mt-2" autofocus="autofocus" name="clave" ngModel
-                                    #clave="ngModel"
-                                    [(ngModel)]="validar.clave"
-                                    minlength="8"
-                                    placeholder="Ingrese una nueva contraseña" required />
-                                <small *ngIf="!clave.valid && clave.touched" class="invalid-feedback d-block">Debe ingresar
-                                    una contraseña
-                                </small>
-                            </div>
-                            <!-- Confirmar Contraseña -->
-                            <div class="form-control-config mb-1">
-                                <label class="text-center">
-                                    <span style="font-size: 16px; font-weight: 300">Confirmar contraseña</span>
-                                </label>
-                                <input type="password" class="form-control mt-2" autofocus="autofocus" name="claveDos" ngModel
-                                    #claveDos="ngModel"
-                                    [(ngModel)]="validar.claveDos"
-                                    minlength="8"
-                                    placeholder="Ingresa nuevamente la contraseña" required />
-                                <small *ngIf="!claveDos.valid && claveDos.touched" class="invalid-feedback d-block">Debe ingresar
-                                    la contraseña
-                                </small>
-                            </div>
-                            <!-- Botón -->
-                            <div class="col-12 text-center">
-                                <button class="btn btn-primary botonConfig" [disabled]="validarCodigo.invalid"
-                                    type="submit">
-                                    Restablecer
-                                </button>
-                            </div>
-                        </form>
-                    </div>
+          -->
+      <!-- -->
+      <div class="col-lg-12 seccion-iniciarSesion">
+        <div class="margen-camposForm">
+          <!-- Título -->
+          <div class="marginCamposInicioSesion mb-4">¿Olvidaste tu contraseña?</div>
+          <div class="container mt-2">
+            <!-- Campos -->
+            <form #validarCodigo="ngForm" (ngSubmit)="onSubmit(validarCodigo)" autocomplete="off">
+              <!-- Codigo -->
+              <div class="form-control-config mb-1">
+                <label class="text-center">
+                  <span style="font-size: 18px; font-weight: 200">Código</span>
+                </label>
+                <input type="text" class="form-control mt-2" autofocus="autofocus" name="codigo" ngModel
+                  #codigo="ngModel" [(ngModel)]="validar.codigo" placeholder="Ingrese el codigo enviado" required />
+                <div *ngIf="codigo.invalid && (codigo.dirty || codigo.touched)">
+                  <small *ngIf="!codigo.valid && codigo.touched" class="invalid-feedback d-block">Debe ingresar
+                    el código enviado.
+                  </small><br>
                 </div>
-                <!-- Footer -->
-                <div class="position-sticky container" style="top: 100vh">
-                    <footer>
-                        <div class="container text-center p-3"></div>
-                    </footer>
+                <hr>
+              </div>
+
+              <!-- Contraseña -->
+              <div class="form-control-config mb-1">
+                <label class="text-center">
+                  <span style="font-size: 16px; font-weight: 300">Contraseña nueva</span>
+                </label>
+                <input type="password" class="form-control mt-2" autofocus="autofocus" name="clave" ngModel
+                  #clave="ngModel" [(ngModel)]="validar.clave" minlength="8" placeholder="Ingrese una nueva contraseña"
+                  required />
+
+                <div *ngIf="clave.invalid && (clave.dirty || clave.touched)">
+                  <small *ngIf="clave.errors?.['required']" class="invalid-feedback d-block">
+                    Debe ingresar una contraseña.
+                  </small>
+
+                  <small *ngIf="clave.errors?.['minlength']" class="invalid-feedback d-block">
+                    Debe ingresar mínimo 6 caracteres.
+                  </small>
                 </div>
-            </div>
+              </div>
+              <!-- Confirmar Contraseña -->
+              <div class="form-control-config mb-1">
+                <label class="text-center">
+                  <span style="font-size: 16px; font-weight: 300">Confirmar contraseña</span>
+                </label>
+                <input type="password" class="form-control mt-2" autofocus="autofocus" name="claveDos" ngModel
+                  #claveDos="ngModel" [(ngModel)]="validar.claveDos" minlength="8"
+                  placeholder="Ingresa nuevamente la contraseña" required />
+
+                <div *ngIf="claveDos.invalid && (claveDos.dirty || claveDos.touched)">
+
+                  <small *ngIf="claveDos.errors?.['required']" class="invalid-feedback d-block">
+                    Debe ingresar la contraseña.
+                  </small>
+                  <small *ngIf="claveDos.errors?.['minlength']" class="invalid-feedback d-block">
+                    Debe ingresar mínimo 6 caracteres.
+                  </small>
+                </div>
+
+                <div>
+
+                </div>
+
+              </div>
+
+              <!-- Botón -->
+              <div class="col-12 text-center">
+                <button class="btn btn-primary botonConfig" [disabled]="validarCodigo.invalid" type="submit">
+                  Restablecer
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
+        <!-- Footer -->
+        <div class="position-sticky container" style="top: 100vh">
+          <footer>
+            <div class="container text-center p-3"></div>
+          </footer>
+        </div>
+      </div>
     </div>
+  </div>
 </div>

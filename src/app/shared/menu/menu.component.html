@@ -1,41 +1,26 @@
-<nav
-  class="navbar navbar-expand-lg navbar-dark bg-primary m-1"
-  ata-bs-theme="dark"
->
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary m-1" ata-bs-theme="dark">
   <div class="container-fluid">
     <a class="navbar-brand" [routerLink]="['/inicio']">SIMED</a>
-    <button
-      class="navbar-toggler"
-      type="button"
-      data-bs-toggle="collapse"
-      data-bs-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a
-            class="nav-link active"
-            aria-current="page"
-            [routerLink]="['/inicio']"
-            >Inicio</a
-          >
+          <a class="nav-link active" aria-current="page" [routerLink]="['/inicio']">Inicio</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" [routerLink]="['/certificados']">Certificados</a>
         </li>
 
-        <li class="nav-item">
+        <!-- <li class="nav-item">
           <a class="nav-link">Pricing</a>
         </li>
 
         <li class="nav-item">
           <a class="nav-link">About</a>
-        </li>
+        </li>-->
       </ul>
 
       <ul class="navbar-nav navbar-right">
@@ -45,36 +30,15 @@
           </div>
         </li>
         <li class="nav-item dropdown">
-          <a
-            class="nav-link dropdown-toggle"
-            href="#"
-            role="button"
-            data-bs-toggle="dropdown"
-            aria-expanded="false"
-          >
-            Nombre Usuario
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <span>{{nameUser}}</span>
           </a>
           <div class="dropdown-menu mt-2" aria-labelledby="navbarDropdown">
             <!-- Boton de modal cambiar contraseña -->
-            <a
-              class="dropdown-item"
-              style="cursor: pointer"
-              data-bs-toggle="modal"
-              data-bs-target="#exampleModal"
-              >Cambiar Contraseña</a
-            >
-            <a
-              class="dropdown-item"
-              style="cursor: pointer"
-              [routerLink]="['/ajustes']"
-              >Ajustes</a
-            >
-            <a
-              class="dropdown-item"
-              style="cursor: pointer"
-              [routerLink]="['/login']"
-              >Salir</a
-            >
+            <a class="dropdown-item" style="cursor: pointer" data-bs-toggle="modal"
+              data-bs-target="#exampleModal">Cambiar Contraseña</a>
+            <a class="dropdown-item" style="cursor: pointer" [routerLink]="['/ajustes']">Ajustes</a>
+            <a class="dropdown-item" style="cursor: pointer" [routerLink]="['/login']">Salir</a>
           </div>
         </li>
       </ul>
@@ -82,94 +46,46 @@
   </div>
 </nav>
 <!-- Modal cambiar contraseña -->
-<div
-  class="modal fade"
-  id="exampleModal"
-  tabindex="-1"
-  aria-labelledby="exampleModalLabel"
-  aria-hidden="true"
->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-sm">
     <div class="modal-content">
       <div class="modal-header">
         <h1 class="modal-title fs-5" id="exampleModalLabel">
           Cambiar Contraseña
         </h1>
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="modal"
-          aria-label="Close"
-        ></button>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <div class="row mt-3">
           <form #cambiarContra="ngForm">
             <div class="col-11">
               <label class="form-label">Contraseña Actual</label>
-              <input
-                type="password"
-                class="form-control"
-                placeholder="Ingrese su contraseña"
-                name="claveActual"
-                ngModel
-                #claveActual="ngModel"
-                required
-                [(ngModel)]="recordarClave.claveActual"
-              />
-              <small
-                *ngIf="!claveActual.valid && claveActual.touched"
-                class="invalid-feedback d-block"
-                >Ingresa su contraseña actual</small
-              >
+              <input type="password" class="form-control" placeholder="Ingrese su contraseña" name="claveActual" ngModel
+                #claveActual="ngModel" required [(ngModel)]="recordarClave.claveActual" />
+              <small *ngIf="!claveActual.valid && claveActual.touched" class="invalid-feedback d-block">Ingresa su
+                contraseña actual</small>
             </div>
 
             <div class="col-11 mt-3">
               <label class="form-label">Contraseña Nueva</label>
-              <input
-                type="password"
-                class="form-control"
-                placeholder="Ingrese su contraseña nueva"
-                name="claveNueva"
-                ngModel
-                #claveNueva="ngModel"
-                required
-                [(ngModel)]="recordarClave.claveNueva"
-              />
-              <small
-                *ngIf="!claveNueva.valid && claveNueva.touched"
-                class="invalid-feedback d-block"
-                >Ingresa su contraseña nueva</small
-              >
+              <input type="password" class="form-control" placeholder="Ingrese su contraseña nueva" name="claveNueva"
+                ngModel #claveNueva="ngModel" required [(ngModel)]="recordarClave.claveNueva" />
+              <small *ngIf="!claveNueva.valid && claveNueva.touched" class="invalid-feedback d-block">Ingresa su
+                contraseña nueva</small>
             </div>
             <div class="col-11 mt-3">
               <label class="form-label">Confirmar Contraseña</label>
-              <input
-                type="password"
-                class="form-control"
-                placeholder="Ingrese su contraseña nueva"
-                name="claveNueva2"
-                ngModel
-                #claveNueva2="ngModel"
-                required
-                [(ngModel)]="recordarClave.claveNueva2"
-              />
-              <small
-                *ngIf="!claveNueva2.valid && claveNueva2.touched"
-                class="invalid-feedback d-block"
-                >Ingresa nuevamente la contraseña nueva</small
-              >
+              <input type="password" class="form-control" placeholder="Ingrese su contraseña nueva" name="claveNueva2"
+                ngModel #claveNueva2="ngModel" required [(ngModel)]="recordarClave.claveNueva2" />
+              <small *ngIf="!claveNueva2.valid && claveNueva2.touched" class="invalid-feedback d-block">Ingresa
+                nuevamente la contraseña nueva</small>
             </div>
           </form>
         </div>
       </div>
       <div class="modal-footer">
-        <button
-          type="button"
-          class="btn btn-primary botonesModal"
-          [disabled]="cambiarContra.invalid"
-          (click)="guardar()"
-        >
+        <button type="button" class="btn btn-primary botonesModal" [disabled]="cambiarContra.invalid"
+          (click)="guardar()">
           Guardar
         </button>
       </div>

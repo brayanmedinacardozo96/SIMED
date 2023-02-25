@@ -6,6 +6,74 @@
         <h4>Mis Certificados</h4>
       </div>
     </div>
+
+    <div class="row">
+      <div class="col-12 mb-4">
+
+        <cdk-accordion class="example-accordion">
+          <!---->
+          <cdk-accordion-item *ngFor="let item of data; let index = index;" #accordionItem="cdkAccordionItem"
+            class="example-accordion-item" role="button" tabindex="0" [attr.id]="'accordion-header-' + index"
+            [attr.aria-expanded]="accordionItem.expanded" [attr.aria-controls]="'accordion-body-' + index">
+            <div class="example-accordion-item-header" (click)="accordionItem.toggle()">
+              {{ item.Empresa }}
+              <span class="example-accordion-item-description">
+                Click to {{ accordionItem.expanded ? 'close' : 'open' }}
+              </span>
+            </div>
+            <div class="example-accordion-item-body" role="region"
+              [style.display]="accordionItem.expanded ? '' : 'none'" [attr.id]="'accordion-body-' + index"
+              [attr.aria-labelledby]="'accordion-header-' + index">
+              <!---->
+              <mat-table class="mat-elevation-z8" #table [dataSource]="item.ConfiguracionInformesPortalWeb" matSort>
+
+                <ng-container matColumnDef="Anio">
+                  <mat-header-cell *matHeaderCellDef class="custom-mat-header-styling tableHeaderCellDiv">
+                    <th>Año</th>
+                  </mat-header-cell>
+                  <mat-cell *matCellDef="let row"> {{row.Anio}} </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="TipoInforme">
+                  <mat-header-cell *matHeaderCellDef>
+                    <th>Tipo de Informe</th>
+                  </mat-header-cell>
+                  <mat-cell *matCellDef="let row"> {{row.TipoInforme}} </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="Periodicidad">
+                  <mat-header-cell *matHeaderCellDef>
+                    <th>Periodicidad</th>
+                  </mat-header-cell>
+                  <mat-cell *matCellDef="let row"> {{row.Periodicidad}} </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="PeriodoDisponible">
+                  <mat-header-cell *matHeaderCellDef>
+                    <th>Periodo disponible</th>
+                  </mat-header-cell>
+                  <mat-cell *matCellDef="let row"> {{row.PeriodoDisponible}} </mat-cell>
+                </ng-container>
+
+
+                <!-- Header and Row Declarations -->
+                <mat-header-row
+                  *matHeaderRowDef="['Anio','TipoInforme','Periodicidad','PeriodoDisponible']"></mat-header-row>
+                <mat-row
+                  *matRowDef="let row; columns: ['Anio','TipoInforme','Periodicidad','PeriodoDisponible']"></mat-row>
+
+              </mat-table>
+
+              <!---->
+            </div>
+          </cdk-accordion-item>
+          <!---->
+        </cdk-accordion>
+
+      </div>
+    </div>
+
+    <!--
     <div class="card-body">
       <div class="mb-3">
         <label class="form-label">Empresas</label>
@@ -23,5 +91,6 @@
         <button class="btn btn-primary botonImprimir">Imprimir</button>
       </div>
     </div>
+  -->
   </div>
 </div>
