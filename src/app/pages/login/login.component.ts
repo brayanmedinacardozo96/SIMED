@@ -30,6 +30,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.nameApp = environment.appName;
+    this.storage.clearData();
   }
 
 
@@ -37,7 +38,7 @@ export class LoginComponent implements OnInit {
 
     let response = await this.api.post(environment.api, 'ProveedorPortalWeb/autenticar', { "Nit": f.value.email, "Clave": f.value.password });
     if (response.error != undefined) {
-      this.snackBar.alert("Problemas con la conexión al servidor.")
+      this.snackBar.alert("Problemas con la conexión al servidor.");
       return;
     }
     if (response.Data == null) {
@@ -46,6 +47,7 @@ export class LoginComponent implements OnInit {
     }
 
     this.storage.saveData('user', JSON.stringify(response.Data));
+    this.storage.saveData('pwss', JSON.stringify(f.value.password));
     this._router.navigate(['/inicio']);
 
   }

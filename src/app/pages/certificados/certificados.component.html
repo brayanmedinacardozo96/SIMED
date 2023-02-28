@@ -24,6 +24,9 @@
             <div class="example-accordion-item-body" role="region"
               [style.display]="accordionItem.expanded ? '' : 'none'" [attr.id]="'accordion-body-' + index"
               [attr.aria-labelledby]="'accordion-header-' + index">
+
+
+
               <!---->
               <mat-table class="mat-elevation-z8" #table [dataSource]="item.ConfiguracionInformesPortalWeb" matSort>
 
@@ -41,13 +44,6 @@
                   <mat-cell *matCellDef="let row"> {{row.TipoInforme}} </mat-cell>
                 </ng-container>
 
-                <ng-container matColumnDef="Periodicidad">
-                  <mat-header-cell *matHeaderCellDef>
-                    <th>Periodicidad</th>
-                  </mat-header-cell>
-                  <mat-cell *matCellDef="let row"> {{row.Periodicidad}} </mat-cell>
-                </ng-container>
-
                 <ng-container matColumnDef="PeriodoDisponible">
                   <mat-header-cell *matHeaderCellDef>
                     <th>Periodo disponible</th>
@@ -56,15 +52,24 @@
                 </ng-container>
 
 
+                <ng-container matColumnDef="print">
+                  <mat-header-cell *matHeaderCellDef>
+                    <th></th>
+                  </mat-header-cell>
+                  <mat-cell style="display:flex !important;justify-content:flex-end!important;" *matCellDef="let row">
+                    <mat-icon (click)="goPrint(row,item)">print</mat-icon>
+                  </mat-cell>
+                </ng-container>
+
                 <!-- Header and Row Declarations -->
-                <mat-header-row
-                  *matHeaderRowDef="['Anio','TipoInforme','Periodicidad','PeriodoDisponible']"></mat-header-row>
-                <mat-row
-                  *matRowDef="let row; columns: ['Anio','TipoInforme','Periodicidad','PeriodoDisponible']"></mat-row>
+                <mat-header-row *matHeaderRowDef="['Anio','TipoInforme','PeriodoDisponible','print']"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: ['Anio','TipoInforme','PeriodoDisponible','print']"></mat-row>
 
               </mat-table>
-
               <!---->
+
+
+              
             </div>
           </cdk-accordion-item>
           <!---->

@@ -18,6 +18,13 @@ export class AjustesComponent {
   }
 
   constructor(private storage: LocalstorageService) {
+
+  }
+
+  ngOnInit(): void {
+    if (this.storage.getData('user') == null) {
+      return;
+    }
     let data = this.storage.getData('user');
     let telefono = "";
     data.Telefonos.forEach((element: string) => {
@@ -27,6 +34,7 @@ export class AjustesComponent {
     });
     this.data = data;
     this.data.Telefonos = telefono;
+
   }
 
 }

@@ -1,15 +1,19 @@
+
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary m-1" ata-bs-theme="dark">
   <div class="container-fluid">
-    <a class="navbar-brand" [routerLink]="['/inicio']">SIMED</a>
+    <a class="navbar-brand" [routerLink]="['/certificados']">{{nameApp}}</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+        <!--
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" [routerLink]="['/inicio']">Inicio</a>
-        </li>
+        </li>-->
+
         <li class="nav-item">
           <a class="nav-link" [routerLink]="['/certificados']">Certificados</a>
         </li>
@@ -35,8 +39,7 @@
           </a>
           <div class="dropdown-menu mt-2" aria-labelledby="navbarDropdown">
             <!-- Boton de modal cambiar contraseña -->
-            <a class="dropdown-item" style="cursor: pointer" data-bs-toggle="modal"
-              data-bs-target="#exampleModal">Cambiar Contraseña</a>
+            <a class="dropdown-item" style="cursor: pointer" [routerLink]="['/actualizar-clave']">Cambiar Contraseña</a>
             <a class="dropdown-item" style="cursor: pointer" [routerLink]="['/ajustes']">Ajustes</a>
             <a class="dropdown-item" style="cursor: pointer" [routerLink]="['/login']">Salir</a>
           </div>
@@ -47,7 +50,7 @@
 </nav>
 <!-- Modal cambiar contraseña -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-sm">
+  <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
         <h1 class="modal-title fs-5" id="exampleModalLabel">

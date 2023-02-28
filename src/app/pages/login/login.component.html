@@ -3,7 +3,8 @@
 </mat-toolbar>
 
 <div class="d-flex">
-  <div id="contenido" class="w-100">
+  <div style='background-image: url("../../../assets/img/bg-uniavanti.jpg");background-size: cover;' id="contenido"
+    class="w-100">
     <div class="row justify-content-center align-items-center">
       <!-- Configuración del logo  -->
       <!--
@@ -15,12 +16,12 @@
       <div class="col-lg-7 seccion-iniciarSesion">
         <div class="margen-camposForm">
           <!-- Título -->
-          <div class="marginCamposInicioSesion mb-4">Login</div>
+          <div style="color:white" class="marginCamposInicioSesion mb-4">Login</div>
           <div class="container mt-5">
             <!-- Campos de ingreso -->
             <form #loginForm="ngForm" (ngSubmit)="ingresar(loginForm)" autocomplete="off">
               <div class="form-control-config mb-4">
-                <label class="text-center">
+                <label style="color:white" class="text-center">
                   <span style="font-size: 18px; font-weight: 400">Usuario</span>
                 </label>
                 <input type="text" class="form-control" autofocus="autofocus" name="email" ngModel #email="ngModel"
@@ -28,7 +29,7 @@
                 <small *ngIf="!email.valid && email.touched" class="invalid-feedback d-block">Ingresa su usuario</small>
               </div>
               <div class="form-control-config mb-2">
-                <label class="text-center">
+                <label style="color:white" class="text-center">
                   <span style="font-size: 18px; font-weight: 400">Contraseña</span>
                 </label>
                 <input type="password" name="password" class="form-control" ngModel #password="ngModel"
@@ -36,7 +37,7 @@
                 <small *ngIf="!password.valid && password.touched" class="invalid-feedback d-block">Ingresa su
                   contraseña</small>
                 <!--boton del Modal recordar contraseña -->
-                <div class="float-end mt-2">
+                <div style="color:white" class="float-end mt-2">
                   <small class="cl-primary" style="cursor: pointer" (click)="recuperarClave()">Recuperar
                     contraseña</small>
                 </div>

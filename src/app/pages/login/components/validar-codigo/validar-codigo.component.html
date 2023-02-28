@@ -65,7 +65,6 @@
                   placeholder="Ingresa nuevamente la contraseña" required />
 
                 <div *ngIf="claveDos.invalid && (claveDos.dirty || claveDos.touched)">
-
                   <small *ngIf="claveDos.errors?.['required']" class="invalid-feedback d-block">
                     Debe ingresar la contraseña.
                   </small>

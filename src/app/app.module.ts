@@ -27,6 +27,8 @@ import { SnackbarComponent } from './utils/snackbar/snackbar.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { ReactiveFormsModule } from '@angular/forms';
+import { PasswordComponent } from './pages/ajustes/password/password.component';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -40,6 +42,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     ValidarCodigoComponent,
     LoadingComponent,
     SnackbarComponent,
+    PasswordComponent,
 
   ],
   providers: [
@@ -61,8 +64,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatSnackBarModule,
     MatCardModule,
     MatToolbarModule,
-    //  FormsModule,
     ReactiveFormsModule,
+    MatIconModule
   ]
 })
 export class AppModule { }

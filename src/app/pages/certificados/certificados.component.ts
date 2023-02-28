@@ -4,6 +4,8 @@ import { LocalstorageService } from '../../services/localstorage/localstorage.se
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { informe } from './interface/informe_interface';
+import { environment } from 'src/environments/environment';
+import { SnackBarService } from 'src/app/services/snackbar/snackbar.service';
 
 @Component({
   selector: 'app-certificados',
@@ -31,92 +33,88 @@ export class CertificadosComponent {
   ]
 
 
-  constructor(private api: ApiService, storage: LocalstorageService) {
-    console.log("1");
+  constructor(private api: ApiService,
+    private storage: LocalstorageService,
+    private snackBar: SnackBarService) {
+
   }
 
   ngOnInit(): void {
-    console.log("2");
     this.loadTable();
   }
 
-  loadTable() {
-    let r = this.loadData();
-    this.data = r;
-    console.log(r);
+  async loadTable() {
+
+    let user = this.storage.getData('user');
+
+    let response = await this.api.get(environment.api, '/configuracionInformePortalWeb', `nit=${user.Identificacion}`);
+
+    if (response.Data == null) {
+      this.snackBar.alert(response.Mensaje);
+      return;
+    }
+
+    response.Data.forEach((element: { ConfiguracionInformesPortalWeb: any[]; }) => {
+      let item = element.ConfiguracionInformesPortalWeb.sort((firstItem: any, secondItem: any) => secondItem.Anio - firstItem.Anio);
+      element.ConfiguracionInformesPortalWeb = item;
+    });
+
+
+    this.data = response.Data;
 
   }
 
-  dataSource(data = []) {
-    let dataSource = new MatTableDataSource<informe>(data);
-    return dataSource;
+  async goPrint(item: any, data: any) {
+
+    let method = '';
+
+    if (item['TipoInforme'] == 'RETE IVA') {
+      method = 'CertificadoIVA'
+    }
+    if (item['TipoInforme'] == 'RETE ICA') {
+      method = 'CertificadoICA'
+    }
+
+    if (item['TipoInforme'] == 'RETE FUENTE') {
+      method = 'CertificadoRetFuente'
+    }
+
+    let user = this.storage.getData('user');
+
+    let response = await this.api.post(environment.api, method, {
+      Empresa: data.EmpresaNumero,
+      Anio: item.Anio,
+      Periodo: item.PeriodoDisponible,
+      Nit: user.Identificacion
+    });
+
+
+    if (response == null) {
+      this.snackBar.alert("Problemas con la conexión al servidor.");
+      return;
+    }
+
+    this.snackBar.alert(response.Mensaje);
+
+    if (response.Data == null) {
+      return;
+    }
+
+    this.downloadPDF(response.Data, `${item.Anio}_${item.TipoInforme}_${data.Empresa}`);
+
   }
 
-  loadData() {
-    return [
-      {
-        "Empresa": "CONSTRUCTORA SERVING S.A.S",
-        "EmpresaNumero": "1",
-        "TotalCertificados": 5,
-        "ConfiguracionInformesPortalWeb": [
-          {
-            "Anio": 2018,
-            "TipoInforme": "RETE ICA",
-            "Periodicidad": "No Aplica",
-            "PeriodoDisponible": "Anual"
-          },
-          {
-            "Anio": 2020,
-            "TipoInforme": "RETE IVA",
-            "Periodicidad": "Cuatrimestral",
-            "PeriodoDisponible": "Septiembre-Diciembre"
-          },
-          {
-            "Anio": 2019,
-            "TipoInforme": "RETE IVA",
-            "Periodicidad": "Bimestral",
-            "PeriodoDisponible": "Enero-Febrero"
-          },
-          {
-            "Anio": 2021,
-            "TipoInforme": "RETE IVA",
-            "Periodicidad": "Cuatrimestral",
-            "PeriodoDisponible": "Mayo-Agosto"
-          },
-          {
-            "Anio": 2018,
-            "TipoInforme": "RETE FUENTE",
-            "Periodicidad": "No Aplica",
-            "PeriodoDisponible": "Anual"
-          }
-        ]
-      },
-      {
-        "Empresa": "PROMOTORA CASTILLANA S.A.S",
-        "EmpresaNumero": "22",
-        "TotalCertificados": 3,
-        "ConfiguracionInformesPortalWeb": [
-          {
-            "Anio": 2018,
-            "TipoInforme": "RETE ICA",
-            "Periodicidad": "No Aplica",
-            "PeriodoDisponible": "Anual"
-          },
-          {
-            "Anio": 2020,
-            "TipoInforme": "RETE IVA",
-            "Periodicidad": "Bimestral",
-            "PeriodoDisponible": "Julio-Agosto"
-          },
-          {
-            "Anio": 2019,
-            "TipoInforme": "RETE IVA",
-            "Periodicidad": "Cuatrimestral",
-            "PeriodoDisponible": "Septiembre-Diciembre"
-          }
-        ]
-      }
-    ];
+
+  downloadPDF(pdf: string, name: string) {
+    const linkSource = `data:application/pdf;base64,${pdf}`;
+    const downloadLink = document.createElement("a");
+    const fileName = `${name}.pdf`;
+    downloadLink.href = linkSource;
+    downloadLink.download = fileName;
+    downloadLink.click();
   }
+
+
+
 
 }

@@ -13,7 +13,7 @@ export class LocalstorageService {
     this.localStorage = window.localStorage;
   }
 
-  private encrypt(txt: string): string {
+  public encrypt(txt: string): string {
     return CryptoJS.AES.encrypt(txt, this.key).toString();
   }
 
@@ -26,9 +26,14 @@ export class LocalstorageService {
   }
 
   public getData(key: string) {
-    let data = localStorage.getItem(key) || "{}";
-    let result = this.decrypt(data);
-    return JSON.parse(result);
+    try {
+      let data = localStorage.getItem(key) || "{}";
+      let result = this.decrypt(data);
+      return JSON.parse(result);
+    } catch (error) {
+      return null;
+    }
+
   }
 
   public removeData(key: string) {
@@ -39,6 +44,10 @@ export class LocalstorageService {
     localStorage.clear();
   }
 
+  public getDataEncrypt(key: string) {
+    let data = localStorage.getItem(key) || "{}";
+    return data;
+  }
 
 
 }

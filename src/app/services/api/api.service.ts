@@ -15,6 +15,23 @@ export class ApiService {
 
   constructor(private http: HttpClient) { } //, private snackBar: MatSnackBar
 
+  async get(base: string, method: string, params: any) {
+
+    GlobalConstants.showLoading = true;
+
+    let response = await firstValueFrom(this.http.get(`${base}${method}?${params}`,
+
+    )).then((value) => {
+      return value;
+    }).catch((err) => {
+      return err;
+    });
+
+    GlobalConstants.showLoading = false;
+
+    return response;
+
+  }
 
   async post(base: string, method: string, params: object) {
 

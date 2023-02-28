@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 import Swal from 'sweetalert2';
 import { LocalstorageService } from '../../services/localstorage/localstorage.service'
 
@@ -10,6 +12,7 @@ import { LocalstorageService } from '../../services/localstorage/localstorage.se
 })
 export class MenuComponent {
 
+  nameApp = "";
   nameUser = "";
   recordarClave = {
     claveActual: '',
@@ -17,8 +20,20 @@ export class MenuComponent {
     claveNueva2: '',
   };
 
-  constructor(private storage: LocalstorageService) {
-    this.nameUser = storage.getData('user').NombreCompleto;
+  constructor(private _router: Router, private storage: LocalstorageService) {
+
+  }
+
+  ngOnInit(): void {
+
+    if (this.storage.getData('user') != null) {
+      this.nameUser = this.storage.getData('user').NombreCompleto;
+    } else {
+      this._router.navigate(['/']);
+    }
+
+    this.nameApp = environment.appName;
+
   }
 
   guardar() {
